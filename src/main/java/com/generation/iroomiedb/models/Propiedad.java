@@ -1,10 +1,13 @@
 package com.generation.iroomiedb.models;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.Table;
 
 @Entity
@@ -22,11 +25,34 @@ public class Propiedad {
 	private String municipio;
 	private String banios;
 	private String habitaciones;
-	//faltan las llaves foraneas nene
+	private String genero;
+	
+	/*
+	  @JoinTable(
+		        name = "propiedad_has_servicios",
+		        joinColumns = @JoinColumn(name = "propiedad_id", nullable = false),
+		        inverseJoinColumns = @JoinColumn(name="servicios_id", nullable = false)
+		    )
+	  @ManyToMany(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+	    private List<Servicio> servicios;
+	  
+	  public void addServicio(Servicio servicio){
+	        if(this.servicios == null){
+	            this.servicios = new ArrayList<>();
+	        }
+	        
+	        this.servicios.add(servicio);
+	    }
+	
+	*/
 	
 	
+	public Propiedad() {
+		
+	}//constructor vacio
+
 	public Propiedad(Long id, String nombre, double precio, String foto, String direccion, String municipio,
-			String banios, String habitaciones) {
+			String banios, String habitaciones, String genero) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -36,12 +62,8 @@ public class Propiedad {
 		this.municipio = municipio;
 		this.banios = banios;
 		this.habitaciones = habitaciones;
-		
-	}//constructorPropiedad
-	
-	public Propiedad() {
-		super();
-	}//constructor vacio
+		this.genero = genero;
+	}
 
 	public Long getId() {
 		return id;
@@ -106,13 +128,37 @@ public class Propiedad {
 	public void setHabitaciones(String habitaciones) {
 		this.habitaciones = habitaciones;
 	}
+	
+	
+	
+	
+	/*
+	public List<Servicio> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(List<Servicio> servicios) {
+		this.servicios = servicios;
+	}
+
+	*/
+
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
 
 	@Override
 	public String toString() {
 		return "Propiedad [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", foto=" + foto + ", direccion="
 				+ direccion + ", municipio=" + municipio + ", banios=" + banios + ", habitaciones=" + habitaciones
-				+ "]";
-	}//toString
+				+ ", genero=" + genero + "]";
+	}
 
+	
 
 }

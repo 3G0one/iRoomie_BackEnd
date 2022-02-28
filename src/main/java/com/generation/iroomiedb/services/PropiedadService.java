@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.generation.iroomiedb.models.Propiedad;
 
+
 @Service
 public class PropiedadService {
 
@@ -36,7 +37,7 @@ public class PropiedadService {
 	public void addPropiedad(Propiedad pro) {
 		Optional<Propiedad> prodByName = proRepo.findByNombre(pro.getNombre());
 		if(prodByName.isPresent()) { 
-			throw new IllegalStateException("EL producto con el nombre " +pro.getNombre()+" ya existe" );
+			throw new IllegalStateException("El producto con el nombre " +pro.getNombre()+" ya existe" );
 		} else{
 			
 			proRepo.save(pro);
@@ -45,7 +46,7 @@ public class PropiedadService {
 		
 
 	public void updatePropiedad(Long idPro, String nombre, double precio, String foto, String direccion,
-			String municipio, String banios, String habitaciones) {
+			String municipio, String banios, String habitaciones, String genero) {
 		if (proRepo.existsById(idPro)) {
 			Propiedad p = proRepo.getById(idPro);
 			if(nombre != null)p.setNombre(nombre);
@@ -55,13 +56,17 @@ public class PropiedadService {
 			if(municipio != null)p.setMunicipio(municipio);
 			if(banios != null)p.setBanios(banios);
 			if(habitaciones != null)p.setHabitaciones(habitaciones);
+			if(genero != null)p.setGenero(genero);
+			/*if(servicios != null)p.setServicios(servicios);*/
 			proRepo.save(p);
 			
 		}else {
 			System.out.println("No existe el id"+idPro);
 		}//if
 		
-	}
+	}//update
+
+	
 
 	
 
